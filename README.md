@@ -6,3 +6,6 @@ The repo includes both the problem description ([challenge.pdf](./challenge.pdf)
 Besides, this challenge was in fact used as one of the problems in the final exam of the course Network Administration and System Administration (Lab), aka NASA, in spring 2025 at NTU CSIE.
 
 I'm too lazy to write more instructions rn so please refer to [challenge.pdf](./challenge.pdf) for more details.
+
+## License
+This project is licensed under GNU GPL v3.0.
