@@ -1,0 +1,14 @@
+[Unit]
+Description=Service to keep udp-test-server.py online
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/path/to/the/parent/dir/of/this/dir/
+ExecStart=/bin/bash -c 'source ./venv/bin/activate && ./udp-test-server/udp-test-server.py'
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

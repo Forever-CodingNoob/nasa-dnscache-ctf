@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  benign-forwarder:
+    image: python:3.13-alpine
+    container_name: benign-forwarder
+    environment:
+      - PYTHONUNBUFFERED=1
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - .:/app:ro
+    networks:
+      nasa-dns-net:
+        ipv4_address: 10.5.0.2
+    command: ["/app/forwarder-start-up.sh", "benign-forwarder.py"]
+
+  attacker-forwarder:
+    image: python:3.13-alpine
+    container_name: attacker-forwarder
+    environment:
+      - PYTHONUNBUFFERED=1
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - .:/app:ro
+    networks:
+      nasa-dns-net:
+        ipv4_address: 10.5.66.66
+    command: ["/app/forwarder-start-up.sh", "attacker-forwarder.py"]
+
+networks:
+  nasa-dns-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
